@@ -5,7 +5,7 @@ from email.MIMEText import MIMEText
 from email.Utils import COMMASPACE, formatdate, parsedate_tz, mktime_tz
 import time
 
-from config import imap_server, mail_user, mail_password, mailBoxLabel, markAsRead
+from config import imapServer, mailUser, mailPassword, mailBoxLabel, markAsRead
 
 
 class imapMail():
@@ -15,8 +15,8 @@ class imapMail():
         pass
 
     def login(self):
-        self.mail=imaplib.IMAP4_SSL(imap_server)
-        self.mail.login(mail_user, mail_password)
+        self.mail=imaplib.IMAP4_SSL(imapServer)
+        self.mail.login(mailUser, mailPassword)
 
     def getLatestUploadtime(self):
         result, mailCount = self.mail.select(mailBoxLabel)

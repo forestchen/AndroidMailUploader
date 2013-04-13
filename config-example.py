@@ -2,9 +2,9 @@
 # The user name of your email account.
 # For example, if your Gmail account is abc@gmail.com,
 # the "abc" is what you should use as the user name.
-mail_user='abc'
+mailUser='abc'
 # The password of your email account.
-mail_password='password'
+mailPassword='password'
 # The address of your email.
 localProfile = "abc@gmail.com"
 # The domain of your organization, it could be any string,
@@ -25,4 +25,4 @@ markAsRead = True
 # The mail box will be created if it does not exist.
 mailBoxLabel = "SMS"
 # The server of the imap.
-imap_server='imap.gmail.com'
+imapServer='imap.gmail.com'

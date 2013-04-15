@@ -12,15 +12,12 @@ localProfile = "abc@gmail.com"
 domain = "abc.com"
 
 
+######### more ###########
 # the ammount of messages you want to upload each time,
 # you can increase this number as you like.
 smsLimit = 24
 # Mark the uploaded messages as read.
 markAsRead = True
-
-
-
-######### more ###########
 # The imap mail box you want to use to store the messages.
 # The mail box will be created if it does not exist.
 mailBoxLabel = "SMS"

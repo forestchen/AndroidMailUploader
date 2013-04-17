@@ -12,10 +12,7 @@ def main():
     mail = imapMail()
     mail.login()
     latestTime = mail.getLatestUploadtime()
-    if latestTime is None:
-        exit()
-    else:
-        latestTime = latestTime * 1000
+    if latestTime is None: exit()
     smsList = provider.getLatestSMS(latestTime, smsLimit)
 
     messages = []

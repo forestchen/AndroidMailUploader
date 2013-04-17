@@ -1,7 +1,7 @@
 Reqirement
 ==========
 
-This Scripts require Python environment on the Phone. The easiest way to create a Python environment is to install the [android-scripting][] app and install Python through it.
+These Scripts require Python environment on the phone. The easiest way to create a Python environment is to install the [android-scripting][] app and install Python through it.
 
 Installation
 ============

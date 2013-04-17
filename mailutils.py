@@ -37,25 +37,40 @@ class imapMail():
 
         if mailCount == ['0']: return 0
 
-        msgID = ['']
+        msgUIDs = ['']
         """ initial search time within 1 day """
         expandTime = 86400
-        while (msgID == ['']):
+        while (msgUIDs == ['']):
             """ check for the maximum time """
             if expandTime > 88473600:
                 return (time.time() - expandTime)
-            result, msgID = self.mail.search(None, 'SINCE', imaplib.Time2Internaldate(time.time() - expandTime))
+            sinceTime = imaplib.Time2Internaldate(time.time() - expandTime)
+            result, msgUIDs = self.mail.search(None, 'SINCE', sinceTime)
             expandTime = expandTime * 2
 
-        idString = ','.join(msgID[0].split())
-        result, msgDate = self.mail.fetch(idString, '(INTERNALDATE)')
-
+        idString = ','.join(msgUIDs[0].split())
+        result, msgIDs = self.mail.fetch(idString, '(BODY[HEADER.FIELDS (MESSAGE-ID)])')
         latest = 0
-        for date in msgDate:
-            _date = date.split('"')[1]
-            seconds = mktime_tz(parsedate_tz(_date))
-            if seconds > latest:
-                latest = seconds
+        for msgID in msgIDs:
+            if len(msgID) < 2: continue
+            try:
+                epoch = msgID[1].split('.')[1][0:13]
+            except:
+                latest = -1
+                break
+            if epoch > latest:
+                latest = epoch
+
+        if latest == -1:
+            print "unrecognized message id"
+            result, msgDate = self.mail.fetch(idString, '(INTERNALDATE)')
+            latest = 0
+            for date in msgDate:
+                _date = date.split('"')[1]
+                seconds = mktime_tz(parsedate_tz(_date))
+                if seconds > latest:
+                    latest = seconds
+            latest = latest * 1000
 
         return latest
 

@@ -1,6 +1,8 @@
 #! /usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import time
+import re
 
 from mailutils import imapMail
 import provider
@@ -35,6 +37,9 @@ def main():
                 sender = provider.getContactName(sms['person'])
             else:
                 sender = provider.getContactNameByPhoneNumber(address)
+            if sender == "":
+                _sender = re.findall('[【\[]([^】\]]+)[】\]]$'.decode('utf-8'), sms['body'])
+                if len(_sender) != 0: sender = _sender[0]
             message['origin'] = ("%s <%s>" % (sender, addressOriginal)).encode('utf-8')
             message['destination'] = [localProfile, ]
             if sender != '':
